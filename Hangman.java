@@ -1,6 +1,8 @@
 import java.util.Scanner;
 
+
 public class Hangman {
+    static Scanner scan = new Scanner(System.in);
 
     public static String[] words = {"ant", "baboon", "badger", "bat", "bear", "beaver", "camel",
     "cat", "clam", "cobra", "cougar", "coyote", "crow", "deer",
@@ -68,27 +70,60 @@ public class Hangman {
     "     |\n" +
     " =========\n"};
 
+   
     public static void main(String[] args) {
 
-        Scanner scan = new Scanner(System.in);
+        
         System.out.println("Let's play hangman! Press any key to continue");
-        scan.nextLine();
+        scan.nextLine(); 
         int misses = 0;
+        String word = getRandomWord();
+        char[] wordArray = new char[word.length()];
+        for(int i = 0; i < word.length(); i++){
+            wordArray[i] = word.charAt(i);
+        }
+        char[] board = new char[word.length()];
+        for(int i = 0; i < word.length(); i++){
+            board[i] = '_';
+        }
 
-        // initialize board
-        // Get a random word with the random word generator
-        // Make a function that prints the board (based off of tic tac toe);
-            // if misses are a certain number, prints different board. 
-            // In here make sure that it prints the length of the word? Unless that needs to be in the main part
-        // Make a function to ask user, and compares the character to the characters in the string(Since a string is just a different kind of array)
+        char[] guesses = new char[6];
+
+
+        // while(misses < 6){
+            printGallows(misses, board);
+            char guess = askUser();
+            char num = 0;
+
+            for(int i = 0; i < wordArray.length; i++){
+                if(guess == wordArray[i]){
+                    board[i] = guess;
+                    num++;
+                }
+                
+            }
+            if(num == 0){
+                misses++;
+                guesses[misses - 1] = guess;
+            }
+            
+            printGallows(misses, board);
+        // }
+
+
+        // Make a function that prints the board (based off of tic tac toe); - basically done
+            // if misses are a certain number, prints different board. - need to figure out the while loop in this situation
+        // Make a function to ask user, and compares the character to the characters in the string
         // Adds misses if incorrect, and updates board, fills in spaces if correct and displays board
         // If they get the word, they win
         // If the gallows gets to the end, they lose. 
 
         
 
-        System.out.println(getRandomWord());
-
+        if(misses == 6){
+            printGallows(misses, board);
+            System.out.println("Sorry, you lose.");
+        }
 
 
         scan.close();
@@ -113,6 +148,21 @@ public class Hangman {
         String word = words[randomNumber]; 
 
         return word;
+    }
+
+    public static void printGallows(int misses, char[] board){
+        System.out.println(gallows[misses]);
+        for(int i = 0; i < board.length; i++){
+            System.out.print(board[i] + " ");
+        }
+    }
+
+    public static char askUser(){
+       System.out.print("\nGuess a single character: ");
+
+        char guess = scan.next().charAt(0);
+        return guess;
+
     }
 
 }
