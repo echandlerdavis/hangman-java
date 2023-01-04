@@ -90,10 +90,10 @@ public class Hangman {
         char[] guesses = new char[6];
 
 
-        // while(misses < 6){
-            printGallows(misses, board);
+        while(misses < 6){
+            printGallows(misses, board, guesses);
             char guess = askUser();
-            char num = 0;
+            int num = 0;
 
             for(int i = 0; i < wordArray.length; i++){
                 if(guess == wordArray[i]){
@@ -107,22 +107,18 @@ public class Hangman {
                 guesses[misses - 1] = guess;
             }
             
-            printGallows(misses, board);
-        // }
+            int correct = checkWin(board, wordArray);
+            if(correct == wordArray.length){
+                printGallows(misses, board, guesses);
+                System.out.println("\n\nCongratulations, you win!");
+                break;
+            }
 
-
-        // Make a function that prints the board (based off of tic tac toe); - basically done
-            // if misses are a certain number, prints different board. - need to figure out the while loop in this situation
-        // Make a function to ask user, and compares the character to the characters in the string
-        // Adds misses if incorrect, and updates board, fills in spaces if correct and displays board
-        // If they get the word, they win
-        // If the gallows gets to the end, they lose. 
-
-        
+         }
 
         if(misses == 6){
-            printGallows(misses, board);
-            System.out.println("Sorry, you lose.");
+            printGallows(misses, board, guesses);
+            System.out.println("\nSorry, you lose.");
         }
 
 
@@ -150,20 +146,41 @@ public class Hangman {
         return word;
     }
 
-    public static void printGallows(int misses, char[] board){
-        System.out.println(gallows[misses]);
+    public static void printGallows(int misses, char[] board, char[]guesses){
+        System.out.println("\n\n" + gallows[misses]);
+        System.out.print("Word: ");
         for(int i = 0; i < board.length; i++){
             System.out.print(board[i] + " ");
         }
+        System.out.print("\n\nMisses: ");
+        for(int i = 0; i < guesses.length; i++){
+            if(guesses != null){
+                System.out.print(guesses[i]);
+            }
+        }
+
     }
 
     public static char askUser(){
-       System.out.print("\nGuess a single character: ");
+       System.out.print("\n\nGuess: ");
 
         char guess = scan.next().charAt(0);
         return guess;
 
     }
+
+    public static int checkWin(char[] board, char[]wordArray){
+        int numCorrect = 0; 
+        for(int i = 0; i < board.length; i++){
+            if(board[i] == wordArray[i]){
+                numCorrect++;
+            }
+
+        }
+        return numCorrect;
+    }
+
+
 
 }
 
