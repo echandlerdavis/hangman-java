@@ -139,9 +139,11 @@ public class Hangman {
 
     public static String getRandomWord(){
         // get a random number and choose from the list based on that number. 
-        int randomNumber = (int)(Math.random() * words.length);
+        // int randomNumber = (int)(Math.random() * words.length);
 
-        String word = words[randomNumber]; 
+        // String word = words[randomNumber]; 
+
+        String word = "cobra";
 
         return word;
     }

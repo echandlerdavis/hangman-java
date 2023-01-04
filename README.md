@@ -8,24 +8,30 @@
 **How the application is organized**
 Hangman is organized in the following files:
 
-<!-- ![Files](./Assets/images/Screen%20Shot%202022-05-07%20at%2012.59.54%20PM.png)
+![Files](./assets/Screenshot%202023-01-04%20at%2011.12.47%20AM.png)
 
 **Step-by-Step on how to run the application**
-* Add an event to the text box for a given hour
-* Press the save button to the local storage
-* When the page is refreshed, it should still contain the saved event
+* Open the terminal
+* type "java hangman" to begin
+* Press any key to start the game
+* Guess individual characters 
+* If the character is in the generated word, it will fill in the blank
+* If the character is not in the generated word, it will be added to the misses, and a portion of the hangman will show on the board
+* The user wins if they can guess the word before the drawing of the hangman is complete
+* If the user guesses incorrectly 6 times, the drawing of the hangman is completed and they lose.
 
 **What the application looks like**
 
-![Image of Homepage](./Assets/images/Screen%20Shot%202022-05-07%20at%201.00.39%20PM.png)
+![Gif of Application in Use](./assets/HangmanGif.gif)
 
 **Link to Github Repository**
 
-GitHub Repository: https://github.com/echandlerdavis/Work-Day-Scheduler-Homework
+GitHub Repository: https://github.com/echandlerdavis/hangman-java
 
 **Technologies Used** 
 
 * Java!
 * Classes
+* Functions
 * Arrays
-* Loops -->
+* For and While Loops
